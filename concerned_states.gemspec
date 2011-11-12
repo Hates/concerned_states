@@ -4,7 +4,7 @@ require "concerned_states/version"
 
 Gem::Specification.new do |s|
   s.name        = "concerned_states"
-  s.version     = ConcernedStates::VERSION
+  s.version     = "0.0.1"
   s.authors     = ["Richard Hart"]
   s.email       = ["richard@ur-ban.com"]
   s.homepage    = ""
