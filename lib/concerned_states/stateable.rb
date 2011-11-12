@@ -2,21 +2,21 @@ module ConcernedStates
   module Stateable
     extend ActiveSupport::Concern
 
-    included do
-      PASSIVE = "passive"
-      PENDING = "pending"
-      DECLINED = "declined"
-      APPROVED = "approved"
-      ACTIVE = "active"
-      FLAGGED = "flagged"
-      SUSPENDED = "suspended"
-      DELETED = "deleted"
-      STARTED = "started"
-      PAUSED = "paused"
-      CANCELLED = "cancelled"
-      COMPLETED = "completed"
-      ERRORED = "errored"
+    PASSIVE = "passive"
+    PENDING = "pending"
+    DECLINED = "declined"
+    APPROVED = "approved"
+    ACTIVE = "active"
+    FLAGGED = "flagged"
+    SUSPENDED = "suspended"
+    DELETED = "deleted"
+    STARTED = "started"
+    PAUSED = "paused"
+    CANCELLED = "cancelled"
+    COMPLETED = "completed"
+    ERRORED = "errored"
 
+    included do
       scope :passive,
         where(:state => PASSIVE)
 
@@ -32,11 +32,29 @@ module ConcernedStates
       scope :active,
         where(:state => ACTIVE)
 
+      scope :flagged,
+        where(:state => FLAGGED)
+
+      scope :suspended,
+        where(:state => SUSPENDED)
+
       scope :deleted,
         where(:state => DELETED)
 
+      scope :started,
+        where(:state => STARTED)
+
+      scope :paused,
+        where(:state => PAUSED)
+
+      scope :cancelled,
+        where(:state => CANCELLED)
+
       scope :completed,
         where(:state => COMPLETED)
+
+      scope :errored,
+        where(:state => ERRORED)
     end
 
     def passivate; self.state = PASSIVE; end
