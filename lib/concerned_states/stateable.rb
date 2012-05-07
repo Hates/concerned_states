@@ -6,6 +6,7 @@ module ConcernedStates
     PENDING   =  "pending"
     DECLINED  =  "declined"
     APPROVED  =  "approved"
+    INACTIVE  =  "inactive"
     ACTIVE    =  "active"
     FLAGGED   =  "flagged"
     SUSPENDED =  "suspended"
@@ -29,6 +30,9 @@ module ConcernedStates
 
       scope :approved,
         where(:state => APPROVED)
+
+      scope :inactive,
+        where(:state => INACTIVE)
 
       scope :active,
         where(:state => ACTIVE)
@@ -76,6 +80,10 @@ module ConcernedStates
     def approve; self.state = APPROVED; end
     def approve!; update_attribute(:state, APPROVE); end
     def approved?; self.state == APPROVED; end
+
+    def inactivate; self.state = INACTIVE; end
+    def inactivate!; update_attribute(:state, INACTIVE); end
+    def inactive?; self.state == INACTIVE; end
 
     def activate; self.state = ACTIVE; end
     def activate!; update_attribute(:state, ACTIVE); end
