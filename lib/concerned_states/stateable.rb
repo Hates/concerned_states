@@ -2,19 +2,20 @@ module ConcernedStates
   module Stateable
     extend ActiveSupport::Concern
 
-    PASSIVE = "passive"
-    PENDING = "pending"
-    DECLINED = "declined"
-    APPROVED = "approved"
-    ACTIVE = "active"
-    FLAGGED = "flagged"
-    SUSPENDED = "suspended"
-    DELETED = "deleted"
-    STARTED = "started"
-    PAUSED = "paused"
-    CANCELLED = "cancelled"
-    COMPLETED = "completed"
-    ERRORED = "errored"
+    PASSIVE   =  "passive"
+    PENDING   =  "pending"
+    DECLINED  =  "declined"
+    APPROVED  =  "approved"
+    ACTIVE    =  "active"
+    FLAGGED   =  "flagged"
+    SUSPENDED =  "suspended"
+    ARCHIVED  =  "archived"
+    DELETED   =  "deleted"
+    STARTED   =  "started"
+    PAUSED    =  "paused"
+    CANCELLED =  "cancelled"
+    COMPLETED =  "completed"
+    ERRORED   =  "errored"
 
     included do
       scope :passive,
@@ -37,6 +38,9 @@ module ConcernedStates
 
       scope :suspended,
         where(:state => SUSPENDED)
+
+      scope :archived,
+        where(:state => ARCHIVED)
 
       scope :deleted,
         where(:state => DELETED)
@@ -84,6 +88,10 @@ module ConcernedStates
     def suspend; self.state = SUSPENDED; end
     def suspend!; update_attribute(:state, SUSPENDED); end
     def suspended?; self.state == SUSPENDED; end
+
+    def archive; self.state = ARCHIVED; end
+    def archive!; update_attribute(:state, ARCHIVED); end
+    def archived?; self.state == ARCHIVED; end
 
     def delete; self.state = DELETED; end
     def delete!; update_attribute(:state, DELETED); end
